@@ -3,7 +3,11 @@
   "builds": [
     {
       "src": "app.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "maxDuration": 60,
+        "memory": 1024
+      }
     },
     {
       "src": "public/**",
@@ -13,15 +17,18 @@
   "routes": [
     {
       "src": "/analyze",
-      "dest": "app.js"
+      "dest": "app.js",
+      "methods": ["POST"]
     },
     {
       "src": "/download",
-      "dest": "app.js"
+      "dest": "app.js",
+      "methods": ["POST"]
     },
     {
       "src": "/health",
-      "dest": "app.js"
+      "dest": "app.js",
+      "methods": ["GET"]
     },
     {
       "src": "/(.*)",
@@ -30,11 +37,5 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "functions": {
-    "app.js": {
-      "memory": 1024,
-      "maxDuration": 60
-    }
   }
 } 
