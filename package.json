@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "An advanced plant analysis tool using AI to identify plant species and provide care recommendations",
   "main": "app.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
+    "build": "npm install",
+    "vercel-build": "echo hello",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
