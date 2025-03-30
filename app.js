@@ -16,6 +16,14 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, "public")));
+
+// Route for the root path
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
+
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -40,7 +48,6 @@ const upload = multer({
 
 // Initialize Google Generative AI
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-app.use(express.static("public"));
 
 // Helper function to parse plant analysis
 function parsePlantAnalysis(text) {
